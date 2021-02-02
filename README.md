@@ -1,1 +1,1 @@
-Testing 123 ... this should be a GH pages site
+Test site initially copied from https://www.tinyusb.org/examples/webusb-serial/
