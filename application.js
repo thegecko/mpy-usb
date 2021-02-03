@@ -4,6 +4,7 @@
   document.addEventListener('DOMContentLoaded', event => {
     let connectButton = document.querySelector("#connect");
     let statusDisplay = document.querySelector('#status');
+    let terminalElement = document.getElementById("terminal");
     let port;
 
     function addLine(linesId, text) {
@@ -31,12 +32,16 @@
         connectButton.textContent = 'Disconnect';
 
         port.onReceive = data => {
+
           let textDecoder = new TextDecoder();
-          console.log(textDecoder.decode(data));
+	  let decodedText = textDecoder.decode(data);
+          console.log(decodedText);
+          terminalElement.innerText += decodedText;
+
           if (data.getInt8() === 13) {
             currentReceiverLine = null;
           } else {
-            appendLine('receiver_lines', textDecoder.decode(data));
+            appendLine('receiver_lines', decodedText);
           }
         };
         port.onReceiveError = error => {
