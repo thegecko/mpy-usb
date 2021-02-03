@@ -7,42 +7,16 @@
     let terminalElement = document.getElementById("terminal");
     let port;
 
-    function addLine(linesId, text) {
-      var senderLine = document.createElement("div");
-      senderLine.className = 'line';
-      var textnode = document.createTextNode(text);
-      senderLine.appendChild(textnode);
-      document.getElementById(linesId).appendChild(senderLine);
-      return senderLine;
-    }
-
-    let currentReceiverLine;
-
-    function appendLine(linesId, text) {
-      if (currentReceiverLine) {
-        currentReceiverLine.innerHTML =  currentReceiverLine.innerHTML + text;
-      } else {
-        currentReceiverLine = addLine(linesId, text);
-      }
-    }
-
     function connect() {
       port.connect().then(() => {
         statusDisplay.textContent = '';
         connectButton.textContent = 'Disconnect';
 
         port.onReceive = data => {
-
           let textDecoder = new TextDecoder();
 	  let decodedText = textDecoder.decode(data);
           console.log(decodedText);
           terminalElement.innerText += decodedText;
-
-          if (data.getInt8() === 13) {
-            currentReceiverLine = null;
-          } else {
-            appendLine('receiver_lines', decodedText);
-          }
         };
         port.onReceiveError = error => {
           console.error(error);
@@ -78,17 +52,7 @@
       }
     });
 
-
-    let commandLine = document.getElementById("command_line");
-
-    commandLine.addEventListener("keypress", function(event) {
-      if (event.keyCode === 13) {
-        if (commandLine.value.length > 0) {
-          addLine('sender_lines', commandLine.value);
-          commandLine.value = '';
-        }
-      }
-
+    terminalElement.addEventListener("keypress", function(event) {
       port.send(new TextEncoder('utf-8').encode(String.fromCharCode(event.which || event.keyCode)));
     });
   });
