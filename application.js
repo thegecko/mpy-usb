@@ -65,9 +65,14 @@
 	reader.onload = readerEvent => {
 	    var content = readerEvent.target.result;
 	    console.log(content);
-	    port.send(new TextEncoder('utf-8').encode("\x03\x03\x01\x04_fh = open('/test.py', 'w')\x04"));
-	    port.send(new TextEncoder('utf-8').encode("_fh.write('hello')\x04"));
-	    port.send(new TextEncoder('utf-8').encode("_fh.write('world')\x04"));
+	    port.send(new TextEncoder('utf-8').encode("\x03\x03\x01\x04_fh = open('/" + file.name + "', 'wb')\x04"));
+	    for (var i=0; i<content.length; i+=50) {
+		var cmd = "_fh.write(bytes([";
+		for (var j=0; j<50; j++) {
+		    cmd += content.charCodeAt(i*50+j) + ",";
+		}
+		cmd += "]))\x04";
+	        port.send(new TextEncoder('utf-8').encode(cmd));
 	    port.send(new TextEncoder('utf-8').encode('_fh.flush()\x04'));
 	    port.send(new TextEncoder('utf-8').encode('_fh.close()\x04\x02\x03\x03\x04'));
 	}
