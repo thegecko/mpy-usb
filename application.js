@@ -57,9 +57,7 @@
     });
 
     document.addEventListener("paste", function(event) {
-      port.send(new ArrayBuffer([5]));
-      port.send(new TextEncoder('utf-8').encode(String.fromCharCode(event.clipboardData)));
-      port.send(new ArrayBuffer([4]));
+      port.send(new TextEncoder('utf-8').encode("\x05" + event.clipboardData.getData('text/plain') + "\x04"));
     });
 
   });
