@@ -15,8 +15,8 @@
         port.onReceive = data => {
           let textDecoder = new TextDecoder();
 	  let decodedText = textDecoder.decode(data);
-          console.log(decodedText);
           terminalElement.innerText += decodedText;
+          terminalElement.scrollTop = terminalElement.scrollHeight;
         };
         port.onReceiveError = error => {
           console.error(error);
@@ -40,6 +40,22 @@
           statusDisplay.textContent = error;
         });
       }
+    });
+
+    document.getElementById('ctrla').addEventListener('click', function () {
+        if (port) port.send(new ArrayBuffer([1]));
+    });
+    document.getElementById('ctrlb').addEventListener('click', function () {
+        if (port) port.send(new ArrayBuffer([2]));
+    });
+    document.getElementById('ctrlc').addEventListener('click', function () {
+        if (port) port.send(new ArrayBuffer([3]));
+    });
+    document.getElementById('ctrld').addEventListener('click', function () {
+        if (port) port.send(new ArrayBuffer([4]));
+    });
+    document.getElementById('ctrle').addEventListener('click', function () {
+        if (port) port.send(new ArrayBuffer([5]));
     });
 
     serial.getPorts().then(ports => {
