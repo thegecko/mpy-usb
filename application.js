@@ -55,5 +55,12 @@
     document.addEventListener("keypress", function(event) {
       port.send(new TextEncoder('utf-8').encode(String.fromCharCode(event.which || event.keyCode)));
     });
+
+    document.addEventListener("paste", function(event) {
+      port.send(new ArrayBuffer([5]));
+      port.send(new TextEncoder('utf-8').encode(String.fromCharCode(event.clipboardData)));
+      port.send(new ArrayBuffer([4]));
+    });
+
   });
 })();
