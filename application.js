@@ -43,19 +43,19 @@
     });
 
     document.getElementById('ctrla').addEventListener('click', function () {
-        if (port) port.send(new ArrayBuffer([1]));
+        if (port) port.send(new Uint8Array([1]));
     });
     document.getElementById('ctrlb').addEventListener('click', function () {
-        if (port) port.send(new ArrayBuffer([2]));
+        if (port) port.send(new Uint8Array([2]));
     });
     document.getElementById('ctrlc').addEventListener('click', function () {
-        if (port) port.send(new ArrayBuffer([3]));
+        if (port) port.send(new Uint8Array([3]));
     });
     document.getElementById('ctrld').addEventListener('click', function () {
-        if (port) port.send(new ArrayBuffer([4]));
+        if (port) port.send(new Uint8Array([4]));
     });
     document.getElementById('ctrle').addEventListener('click', function () {
-        if (port) port.send(new ArrayBuffer([5]));
+        if (port) port.send(new Uint8Array([5]));
     });
 
     serial.getPorts().then(ports => {
