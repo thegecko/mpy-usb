@@ -73,6 +73,7 @@
 		}
 		cmd += "]))\x04";
 	        port.send(new TextEncoder('utf-8').encode(cmd));
+	    }
 	    port.send(new TextEncoder('utf-8').encode('_fh.flush()\x04'));
 	    port.send(new TextEncoder('utf-8').encode('_fh.close()\x04\x02\x03\x03\x04'));
 	}
