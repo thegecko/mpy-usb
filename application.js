@@ -52,7 +52,7 @@
       }
     });
 
-    terminalElement.addEventListener("keypress", function(event) {
+    document.addEventListener("keypress", function(event) {
       port.send(new TextEncoder('utf-8').encode(String.fromCharCode(event.which || event.keyCode)));
     });
   });
