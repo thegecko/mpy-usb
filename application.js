@@ -59,6 +59,7 @@
     });
 
     document.getElementById('choose-file').onchange = e => {
+	var file = e.target.files[0];
         var reader = new FileReader();
 	reader.readAsText(file, "utf-8");
 	reader.onload = readerEvent => {
