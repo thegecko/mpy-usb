@@ -68,8 +68,8 @@
 	    port.send(new TextEncoder('utf-8').encode("\x03\x03\x01\x04_fh = open('/" + file.name + "', 'wb')\x04"));
 	    for (var i=0; i<content.length; i+=50) {
 		var cmd = "_fh.write(bytes([";
-		for (var j=0; j<50; j++) {
-		    cmd += content.charCodeAt(i*50+j) + ",";
+		for (var j=0; j<50 && (i+j)<content.length; j++) {
+		    cmd += content.charCodeAt(i+j) + ",";
 		}
 		cmd += "]))\x04";
 	        port.send(new TextEncoder('utf-8').encode(cmd));
