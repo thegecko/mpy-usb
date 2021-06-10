@@ -17,9 +17,9 @@ var serial = {};
 
   serial.Port = function(device) {
     this.device_ = device;
-    this.interfaceNumber = 0;
-    this.endpointIn = 0;
-    this.endpointOut = 0;
+    this.interfaceNumber = 1;
+    this.endpointIn = 4;
+    this.endpointOut = 3;
   };
 
   serial.Port.prototype.connect = function() {
