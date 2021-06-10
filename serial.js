@@ -10,13 +10,7 @@ var serial = {};
   };
 
   serial.requestPort = function() {
-    const filters = [
-      { 'vendorId': 0x239A }, // Adafruit boards
-      { 'vendorId': 0x2e8a, 'productId': 0x0006 }, // Raspberry Pi
-      { 'vendorId': 0xcafe }, // TinyUSB example
-      { 'vendorId': 0x1209, 'productId': 0xADDA }, // MicroPython boards
-    ];
-    return navigator.usb.requestDevice({ 'filters': filters }).then(
+    return navigator.usb.requestDevice({ 'filters': [] }).then(
       device => new serial.Port(device)
     );
   }
