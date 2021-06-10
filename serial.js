@@ -57,7 +57,7 @@ var serial = {};
           })
         })
         .then(() => this.device_.claimInterface(this.interfaceNumber))
-//        .then(() => this.device_.selectAlternateInterface(this.interfaceNumber, 0))
+        .then(() => this.device_.selectAlternateInterface(this.interfaceNumber, 0))
         .then(() => this.device_.controlTransferOut({
             'requestType': 'class',
             'recipient': 'interface',
